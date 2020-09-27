@@ -1,5 +1,8 @@
 package com.tilicho.marketsimplifiedsystemtask.data.remote.models;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -189,5 +192,25 @@ public class PublicRepository {
     @SerializedName("deployments_url")
     public String deploymentsUrl;
 
+    public static DiffUtil.ItemCallback<PublicRepository> DIFF_CALLBACK = new DiffUtil.ItemCallback<PublicRepository>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull PublicRepository oldItem, @NonNull PublicRepository newItem) {
+            return oldItem.id == newItem.id;
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull PublicRepository oldItem, @NonNull PublicRepository newItem) {
+            return oldItem.equals(newItem);
+        }
+    };
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+
+        PublicRepository repo = (PublicRepository) obj;
+        return repo.id == this.id;
+    }
 
 }

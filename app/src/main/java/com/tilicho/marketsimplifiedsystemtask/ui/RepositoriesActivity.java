@@ -4,6 +4,11 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.tilicho.marketsimplifiedsystemtask.R;
+import com.tilicho.marketsimplifiedsystemtask.databinding.ActivityRepositoriesBinding;
+import com.tilicho.marketsimplifiedsystemtask.di.components.ActivityComponent;
+import com.tilicho.marketsimplifiedsystemtask.ui.ui.RepositoryViewModel;
+import com.tilicho.marketsimplifiedsystemtask.ui.ui.base.BaseActivity;
+import com.tilicho.marketsimplifiedsystemtask.ui.ui.home.RepositoriesViewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -11,12 +16,22 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class RepositoriesActivity extends AppCompatActivity {
+public class RepositoriesActivity extends BaseActivity<ActivityRepositoriesBinding, RepositoryViewModel> {
+
+    @Override
+    public int getBindingVariable() {
+        return -1;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_repositories;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_repositories);
+        //setContentView(R.layout.activity_repositories);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -26,6 +41,11 @@ public class RepositoriesActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    @Override
+    public void performDependencyInjection(ActivityComponent buildComponent) {
+        buildComponent.inject(this);
     }
 
 }

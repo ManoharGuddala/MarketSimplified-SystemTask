@@ -2,8 +2,10 @@ package com.tilicho.marketsimplifiedsystemtask.data.remote;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.tilicho.marketsimplifiedsystemtask.AppConfig;
+import com.tilicho.marketsimplifiedsystemtask.data.remote.models.PublicRepository;
 import com.tilicho.marketsimplifiedsystemtask.data.remote.models.Repositories;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -37,7 +39,7 @@ public class AppApiHelper implements ApiHelper{
     }
 
     @Override
-    public Observable<Repositories> doCharactersListCall(int limit, int offset) {
-        return apiService.performGetPublicReposCall(limit, offset);
+    public Observable<List<PublicRepository>> doPublicRepoGetCall(long lastRepoId) {
+        return apiService.performGetPublicReposCall(lastRepoId);
     }
 }

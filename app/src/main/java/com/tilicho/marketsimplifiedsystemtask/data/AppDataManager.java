@@ -6,7 +6,10 @@ import com.google.gson.Gson;
 import com.tilicho.marketsimplifiedsystemtask.data.local.db.DatabaseHelper;
 import com.tilicho.marketsimplifiedsystemtask.data.local.prefs.PreferencesHelper;
 import com.tilicho.marketsimplifiedsystemtask.data.remote.ApiHelper;
+import com.tilicho.marketsimplifiedsystemtask.data.remote.models.PublicRepository;
 import com.tilicho.marketsimplifiedsystemtask.data.remote.models.Repositories;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -36,7 +39,7 @@ public class AppDataManager implements DataManager{
     }
 
     @Override
-    public Observable<Repositories> doCharactersListCall() {
-        return mApiHelper.doCharactersListCall();
+    public Observable<List<PublicRepository>> doPublicRepoGetCall(long lastRepoId) {
+        return mApiHelper.doPublicRepoGetCall(lastRepoId);
     }
 }

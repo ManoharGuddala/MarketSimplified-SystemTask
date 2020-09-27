@@ -6,4 +6,11 @@ public class Repositories {
 
     List<PublicRepository> repoList;
 
+    public List<PublicRepository> getRepoList() {
+        return repoList;
+    }
+
+    public void setRepoList(List<PublicRepository> repoList) {
+        this.repoList = repoList;
+    }
 }
