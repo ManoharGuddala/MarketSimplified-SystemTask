@@ -1,12 +1,15 @@
 package com.tilicho.marketsimplifiedsystemtask.data.remote.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PublicRepository {
+public class PublicRepository implements Parcelable {
 
     @Expose
     @SerializedName("id")
@@ -26,7 +29,7 @@ public class PublicRepository {
 
     @Expose
     @SerializedName("private")
-    public String isPrivate;
+    public Boolean isPrivate;
 
     @Expose
     @SerializedName("owner")
@@ -201,6 +204,121 @@ public class PublicRepository {
         @Override
         public boolean areContentsTheSame(@NonNull PublicRepository oldItem, @NonNull PublicRepository newItem) {
             return oldItem.equals(newItem);
+        }
+    };
+
+    protected PublicRepository(Parcel in) {
+        id = in.readLong();
+        nodeId = in.readString();
+        name = in.readString();
+        fullName = in.readString();
+        byte tmpIsPrivate = in.readByte();
+        isPrivate = tmpIsPrivate == 0 ? null : tmpIsPrivate == 1;
+        htmlUrl = in.readString();
+        description = in.readString();
+        fork = in.readString();
+        url = in.readString();
+        forksUrl = in.readString();
+        keysUrl = in.readString();
+        collaboratorsUrl = in.readString();
+        teamsUrl = in.readString();
+        hooksUrl = in.readString();
+        issueEventsUrl = in.readString();
+        eventsUrl = in.readString();
+        assigneesUrl = in.readString();
+        branchesUrl = in.readString();
+        tagsUrl = in.readString();
+        blobsUrl = in.readString();
+        gitTagsUrl = in.readString();
+        gitRefsUrl = in.readString();
+        treesUrl = in.readString();
+        statusesUrl = in.readString();
+        languagesUrl = in.readString();
+        stargazersUrl = in.readString();
+        contributorsUrl = in.readString();
+        subscribersUrl = in.readString();
+        subscriptionUrl = in.readString();
+        commitsUrl = in.readString();
+        gitCommitsUrl = in.readString();
+        commentsUrl = in.readString();
+        issueCommentUrl = in.readString();
+        contentsUrl = in.readString();
+        compareUrl = in.readString();
+        mergesUrl = in.readString();
+        archiveUrl = in.readString();
+        downloadsUrl = in.readString();
+        issuesUrl = in.readString();
+        pullsUrl = in.readString();
+        milestonesUrl = in.readString();
+        notificationsUrl = in.readString();
+        labelsUrl = in.readString();
+        releasesUrl = in.readString();
+        deploymentsUrl = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(nodeId);
+        dest.writeString(name);
+        dest.writeString(fullName);
+        dest.writeByte((byte) (isPrivate == null ? 0 : isPrivate ? 1 : 2));
+        dest.writeString(htmlUrl);
+        dest.writeString(description);
+        dest.writeString(fork);
+        dest.writeString(url);
+        dest.writeString(forksUrl);
+        dest.writeString(keysUrl);
+        dest.writeString(collaboratorsUrl);
+        dest.writeString(teamsUrl);
+        dest.writeString(hooksUrl);
+        dest.writeString(issueEventsUrl);
+        dest.writeString(eventsUrl);
+        dest.writeString(assigneesUrl);
+        dest.writeString(branchesUrl);
+        dest.writeString(tagsUrl);
+        dest.writeString(blobsUrl);
+        dest.writeString(gitTagsUrl);
+        dest.writeString(gitRefsUrl);
+        dest.writeString(treesUrl);
+        dest.writeString(statusesUrl);
+        dest.writeString(languagesUrl);
+        dest.writeString(stargazersUrl);
+        dest.writeString(contributorsUrl);
+        dest.writeString(subscribersUrl);
+        dest.writeString(subscriptionUrl);
+        dest.writeString(commitsUrl);
+        dest.writeString(gitCommitsUrl);
+        dest.writeString(commentsUrl);
+        dest.writeString(issueCommentUrl);
+        dest.writeString(contentsUrl);
+        dest.writeString(compareUrl);
+        dest.writeString(mergesUrl);
+        dest.writeString(archiveUrl);
+        dest.writeString(downloadsUrl);
+        dest.writeString(issuesUrl);
+        dest.writeString(pullsUrl);
+        dest.writeString(milestonesUrl);
+        dest.writeString(notificationsUrl);
+        dest.writeString(labelsUrl);
+        dest.writeString(releasesUrl);
+        dest.writeString(deploymentsUrl);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<PublicRepository> CREATOR = new Creator<PublicRepository>() {
+        @Override
+        public PublicRepository createFromParcel(Parcel in) {
+            return new PublicRepository(in);
+        }
+
+        @Override
+        public PublicRepository[] newArray(int size) {
+            return new PublicRepository[size];
         }
     };
 
